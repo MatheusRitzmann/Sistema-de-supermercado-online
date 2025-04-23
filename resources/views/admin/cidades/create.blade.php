@@ -1,11 +1,17 @@
-<!-- resources/views/cidades/create.blade.php -->
+<!-- resources/views/admin/cidades/create.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
+
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-dark mb-3">
+        ← Voltar para o Dashboard
+    </a>
+
+    <h1>Editar Cidade</h1>
     <h1>Adicionar Cidade</h1>
 
-    <form action="{{ route('cidades.store') }}" method="POST">
+    <form action="{{ route('admin.cidades.store') }}" method="POST">
         @csrf
 
         <div class="form-group">
@@ -48,6 +54,6 @@
         </div>
 
         <button type="submit" class="btn btn-success">Salvar</button>
-        <a href="{{ route('cidades.index') }}" class="btn btn-secondary">Voltar</a>
+        <a href="{{ route('admin.cidades.index') }}" class="btn btn-secondary">Voltar</a>
     </form>
 @endsection
