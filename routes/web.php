@@ -18,8 +18,8 @@ Route::resource('enderecos', EnderecoController::class);
 
 // ROTAS DO ADMINISTRADOR (com prefixo 'admin' e nome de grupo 'admin.' para facilitar)
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Dashboard
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
+    // Painel Administrativo principal
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
     // Cidades e Endereços
     Route::resource('cidades', CidadeController::class);

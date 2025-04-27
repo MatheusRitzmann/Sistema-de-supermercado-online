@@ -13,6 +13,6 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.Dashboard');  // Certifique-se de que o arquivo dashboard.blade.php existe
+        return view('admin.index');  // Carrega a view correta do painel administrativo
     }
 }
