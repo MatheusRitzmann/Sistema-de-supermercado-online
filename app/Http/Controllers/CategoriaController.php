@@ -11,12 +11,11 @@ class CategoriaController extends Controller
     function show(){
 
         $categorias = Categoria::all();
-
-        return view('categorias', ['categorias' => $categorias]);
+    return view('categorias.categorias_show', ['categorias' => $categorias]);
     }
 
     function cadastrar(){
-        return view('categorias_new');
+        return view('categorias.categorias_new');
     }
 
     function alterar($id){

@@ -1,8 +1,8 @@
-extends('template')
+@extends('layouts.template')
 
 @section('conteudo')
     <h1>Cadastro de Categoria</h1>
-    <form action="" method="post">
+    <form action="{{ route('categoria.inserir') }}" method="post">
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome da categoria</label>

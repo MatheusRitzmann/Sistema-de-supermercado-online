@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            background-color: #f8f9fa;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #212529;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar a {
+            color: #adb5bd;
+            text-decoration: none;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            transition: background 0.3s, color 0.3s;
+        }
+        .sidebar a:hover {
+            background-color: #343a40;
+            color: #fff;
+        }
+        .sidebar a i {
+            margin-right: 10px;
+        }
+        .content {
+            flex: 1;
+            padding: 30px;
+        }
+        .sidebar-header {
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #495057;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <i class="bi bi-speedometer2"></i> Admin
+        </div>
+
+        <a href="{{ route('admin.dashboard') }}">
+            <i class="bi bi-house-door-fill"></i> Dashboard
+        </a>
+        <a href="{{ route('admin.cidades.index') }}">
+            <i class="bi bi-geo-alt-fill"></i> Cidades
+        </a>
+        <a href="{{ route('admin.enderecos.index') }}">
+            <i class="bi bi-geo-fill"></i> Endereços
+        </a>
+        <a href="{{ route('produtos.show') }}">
+            <i class="bi bi-box-seam"></i> Produtos
+        </a>
+        <a href="{{ route('categoria.show') }}">
+            <i class="bi bi-tags-fill"></i> Categorias
+        </a>
+        <a href="{{ route('admin.fotos.index', 1) }}">
+            <i class="bi bi-image-fill"></i> Fotos de Produtos
+        </a>
+
+    </div>
+
+    <div class="content">
+        <h1 class="mb-4">Bem-vindo ao Painel Administrativo</h1>
+        <p>Escolha uma opção no menu lateral para gerenciar o sistema.</p>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,4 +1,5 @@
-@extends('template')
+@extends('produtos.template')
+
 
 @section('conteudo')
     <h1>Categorias</h1>
