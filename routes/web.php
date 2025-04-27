@@ -32,7 +32,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('fotos/{id}', [FotoProdutoController::class, 'destroy'])->name('fotos.destroy');
 });
 
-// Produtos
+// ROTAS DE PRODUTOS
 Route::get('/produtos', [ProdutoController::class, 'show'])->name('produtos.show');
 Route::get('/produtos/cadastrar', [ProdutoController::class, 'cadastrar'])->name('produtos.cadastrar');
 Route::post('/produtos/cadastrar', [ProdutoController::class, 'inserir'])->name('produtos.inserir');
@@ -40,7 +40,7 @@ Route::get('/produtos/alterar/{id}', [ProdutoController::class, 'alterar'])->nam
 Route::post('/produtos/alterar/{id}', [ProdutoController::class, 'editar'])->name('produtos.editar');
 Route::get('/produtos/excluir/{id}', [ProdutoController::class, 'excluir'])->name('produtos.excluir');
 
-// Categorias
+// ROTAS DE CATEGORIAS
 Route::get('/categorias', [CategoriaController::class, 'show'])->name('categoria.show');
 Route::get('/categorias/cadastrar', [CategoriaController::class, 'cadastrar'])->name('categoria.cadastrar');
 Route::post('/categorias/cadastrar', [CategoriaController::class, 'inserir'])->name('categoria.inserir');
