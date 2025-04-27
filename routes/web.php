@@ -14,23 +14,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// ROTAS DO CLIENTE (públicas por enquanto)
+// ROTAS DO CLIENTE (públicas)
 Route::resource('enderecos', EnderecoController::class);
 
-// ROTAS DO ADMINISTRADOR (com prefixo 'admin' e nome de grupo 'admin.' para facilitar)
+// ROTAS DO ADMINISTRADOR
 Route::prefix('admin')->name('admin.')->group(function () {
-    // Painel Administrativo principal
+    // Painel administrativo
     Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
-    // Cidades e Endereços
+    // Recursos principais
     Route::resource('cidades', CidadeController::class);
     Route::resource('enderecos', EnderecoController::class);
 
-    // Fotos de Produto (etapa D)
+    // Fotos de Produto
     Route::get('produtos/{produto}/fotos', [FotoProdutoController::class, 'index'])->name('fotos.index');
     Route::get('produtos/{produto}/fotos/create', [FotoProdutoController::class, 'create'])->name('fotos.create');
     Route::post('produtos/{produto}/fotos', [FotoProdutoController::class, 'store'])->name('fotos.store');
-    Route::delete('fotos/{id}', [FotoProdutoController::class, 'destroy'])->name('fotos.destroy');
+    Route::delete('fotos/{foto}', [FotoProdutoController::class, 'destroy'])->name('fotos.destroy'); // <- arrumado aqui
+    Route::get('fotos', [AdminController::class, 'fotosProdutosEscolher'])->name('fotos.escolher');
 });
 
 // ROTAS DE PRODUTOS
@@ -49,5 +50,5 @@ Route::get('/categorias/alterar/{id}', [CategoriaController::class, 'alterar'])-
 Route::post('/categorias/alterar/{id}', [CategoriaController::class, 'editar'])->name('categoria.editar');
 Route::get('/categorias/excluir/{id}', [CategoriaController::class, 'excluir'])->name('categoria.excluir');
 
-//ROTAS PARA LOJA
+// ROTAS PARA LOJA
 Route::get('/loja', [LojaController::class, 'index'])->name('loja.index');

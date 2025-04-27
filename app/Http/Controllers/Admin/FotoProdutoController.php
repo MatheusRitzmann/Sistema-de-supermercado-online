@@ -10,69 +10,51 @@ use Illuminate\Support\Facades\Storage;
 
 class FotoProdutoController extends Controller
 {
-    /**
-     * Lista todas as fotos de um produto.
-     */
-    public function index($produto_id)
+    // Mostrar fotos de um produto
+    public function index(Produto $produto)
     {
-        $produto = Produto::with('fotos')->findOrFail($produto_id);
-        return view('admin.fotos.index', compact('produto'));
+        $fotos = $produto->fotos; // Carrega as fotos do produto
+        return view('admin.fotos.index', compact('produto', 'fotos'));
     }
 
-    /**
-     * Exibe o formulário para adicionar uma nova foto.
-     */
-    public function create($produto_id)
+    // Formulário para adicionar nova foto
+    public function create(Produto $produto)
     {
-        $produto = Produto::findOrFail($produto_id);
         return view('admin.fotos.create', compact('produto'));
     }
 
-    /**
-     * Salva a foto enviada no storage e no banco de dados.
-     */
-    public function store(Request $request, $produto_id)
-    {
-        $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    // Salvar nova foto
+    public function store(Request $request, Produto $produto)
+{
+    $request->validate([
+        'foto' => 'required|image|max:2048',
+    ]);
+
+    if ($request->hasFile('foto')) {
+        $path = $request->file('foto')->store('fotos_produtos', 'public');
+
+        $produto->fotos()->create([
+            'arquivo' => $path,
         ]);
 
-        $produto = Produto::findOrFail($produto_id);
-
-        if ($request->hasFile('foto')) {
-            // Armazena o arquivo em storage/app/public/produtos
-            $fotoPath = $request->file('foto')->store('produtos', 'public');
-
-            // Cria o registro no banco, preenchendo arquivo e caminho
-            FotoProduto::create([
-                'produto_id' => $produto->id,
-                'caminho'    => $fotoPath,
-                'arquivo'    => $fotoPath,
-            ]);
-        }
-
-        return redirect()
-            ->route('admin.fotos.index', $produto->id)
-            ->with('success', 'Foto adicionada com sucesso!');
+        return redirect()->route('admin.fotos.index', $produto->id)->with('success', 'Foto adicionada com sucesso!');
     }
 
-    /**
-     * Remove a foto do storage e do banco.
-     */
+    // Se não vier foto por algum motivo (proteção extra)
+    return back()->withErrors('Erro ao enviar a foto.');
+}
+
+    // Deletar uma foto
     public function destroy($id)
     {
         $foto = FotoProduto::findOrFail($id);
 
-        // Remove o arquivo físico
         if (Storage::disk('public')->exists($foto->arquivo)) {
             Storage::disk('public')->delete($foto->arquivo);
         }
 
-        $produtoId = $foto->produto_id;
         $foto->delete();
 
-        return redirect()
-            ->route('admin.fotos.index', $produtoId)
-            ->with('success', 'Foto excluída com sucesso!');
+        return back()->with('success', 'Foto deletada com sucesso!');
     }
 }

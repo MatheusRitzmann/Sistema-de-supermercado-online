@@ -9,7 +9,7 @@ class FotoProduto extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['arquivo', 'produto_id'];
+    protected $fillable = ['produto_id', 'arquivo'];
 
     public function produto()
     {

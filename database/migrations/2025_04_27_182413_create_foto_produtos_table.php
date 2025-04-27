@@ -6,22 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('foto_produtos', function (Blueprint $table) {
             $table->id();
-            $table->string('arquivo'); // nome do arquivo da imagem
             $table->foreignId('produto_id')->constrained()->onDelete('cascade');
+            $table->string('arquivo');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('foto_produtos');

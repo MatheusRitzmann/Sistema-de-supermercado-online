@@ -10,7 +10,7 @@ class Produto extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nome', 'descricao', 'preco', 'categoria_id', // adicione os campos conforme sua migration de produtos
+        'nome', 'descricao', 'preco', 'categoria_id',
     ];
 
     public function fotos()
