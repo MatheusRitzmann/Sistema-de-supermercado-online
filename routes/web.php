@@ -47,14 +47,3 @@ Route::post('/categorias/cadastrar', [CategoriaController::class, 'inserir'])->n
 Route::get('/categorias/alterar/{id}', [CategoriaController::class, 'alterar'])->name('categoria.alterar');
 Route::post('/categorias/alterar/{id}', [CategoriaController::class, 'editar'])->name('categoria.editar');
 Route::get('/categorias/excluir/{id}', [CategoriaController::class, 'excluir'])->name('categoria.excluir');
-
-// ROTAS DO ADMINISTRADOR (com prefixo 'admin' e nome de grupo 'admin.' para facilitar)
-Route::prefix('admin')->name('admin.')->group(function () {
-
-    // Rota para o dashboard
-    Route::get('dashboard', [AdminController::class, 'index'])->name('dashboard');
-    
-    // Rotas administrativas
-    Route::resource('cidades', CidadeController::class);
-    Route::resource('enderecos', EnderecoController::class);
-});

@@ -21,9 +21,13 @@
             <input type="number" step="0.01" class="form-control" id="preco" name="preco" placeholder="R$ 0.00">
         </div>
         <div class="mb-3">
-            <label for="categoria_id" class="form-label">Categoria ID</label>
-            <input type="number" class="form-control" id="categoria_id" name="categoria_id" placeholder="Categoria ID">
-        </div>
+            <label for="categoria" class="form-label">Categoria</label>
+            <select class="form-select" aria-label="Default select example" id="categoria" name="categoria_id" required>
+                <option selected value="">Selecione uma categoria</option>
+                @foreach ($categoriass as $cat)
+                <option value="{{ $cat->id }}">{{ $cat->nome }}</option>
+                @endforeach
+            </select>
         <input type="submit" value="Cadastrar" class="btn btn-success">
     </form>
 @endsection

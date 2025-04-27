@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('nome', 255); #varchar
             $table->text('descricao');
             $table->integer('quantidade');
-            $table->double('preco'); #double
+            $table->decimal('preco', 10,2); 
             $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categoria_produtos');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->timestamps(); #Data de criação e Data de última alteração.
         });
     }
