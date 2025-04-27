@@ -1,4 +1,4 @@
-@extends('template')
+@extends('produtos.template')
 
 @section('conteudo')
     <h1>Cadastro de Produtos</h1>
@@ -10,19 +10,19 @@
         </div>
         <div class="mb-3">
             <label for="descricao" class="form-label">Descrição</label>
-            <input type="text" class="form-control" id="descricao" name="descricao" placeholder="descricao">
+            <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição">
         </div>
         <div class="mb-3">
-            <label for="quantidade" class="form-label">quantidade</label>
-            <input type="number"  class="form-control" id="quantidade" name="quantidade" placeholder="quantidade">
+            <label for="quantidade" class="form-label">Quantidade</label>
+            <input type="number" class="form-control" id="quantidade" name="quantidade" placeholder="Quantidade">
         </div>
         <div class="mb-3">
             <label for="preco" class="form-label">Valor do Produto</label>
             <input type="number" step="0.01" class="form-control" id="preco" name="preco" placeholder="R$ 0.00">
         </div>
         <div class="mb-3">
-            <label for="categoria" class="form-label">categoria id</label>
-            <input type="number" class="form-control" id="categoria" name="categoria" placeholder="categoria id">
+            <label for="categoria_id" class="form-label">Categoria ID</label>
+            <input type="number" class="form-control" id="categoria_id" name="categoria_id" placeholder="Categoria ID">
         </div>
         <input type="submit" value="Cadastrar" class="btn btn-success">
     </form>
