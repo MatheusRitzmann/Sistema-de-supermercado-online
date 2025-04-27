@@ -7,6 +7,7 @@ use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\Admin\FotoProdutoController;
+use App\Http\Controllers\LojaController;
 
 // Página inicial
 Route::get('/', function () {
@@ -47,3 +48,6 @@ Route::post('/categorias/cadastrar', [CategoriaController::class, 'inserir'])->n
 Route::get('/categorias/alterar/{id}', [CategoriaController::class, 'alterar'])->name('categoria.alterar');
 Route::post('/categorias/alterar/{id}', [CategoriaController::class, 'editar'])->name('categoria.editar');
 Route::get('/categorias/excluir/{id}', [CategoriaController::class, 'excluir'])->name('categoria.excluir');
+
+//ROTAS PARA LOJA
+Route::get('/loja', [LojaController::class, 'index'])->name('loja.index');

@@ -79,9 +79,60 @@
     </div>
 
     <div class="content">
-        <h1 class="mb-4">Bem-vindo ao Painel Administrativo</h1>
-        <p>Escolha uma opção no menu lateral para gerenciar o sistema.</p>
+    <h1 class="mb-4">Bem-vindo ao Painel Administrativo</h1>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-tags-fill"></i> Categorias</h5>
+                    <p class="card-text">Gerencie as categorias disponíveis.</p>
+                    <a href="{{ route('categoria.show') }}" class="btn btn-light">Ver Categorias</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-success">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-box-seam"></i> Produtos</h5>
+                    <p class="card-text">Gerencie os produtos cadastrados.</p>
+                    <a href="{{ route('produtos.show') }}" class="btn btn-light">Ver Produtos</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-warning">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-geo-alt-fill"></i> Cidades</h5>
+                    <p class="card-text">Gerencie as cidades registradas.</p>
+                    <a href="{{ route('admin.cidades.index') }}" class="btn btn-light">Ver Cidades</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-info">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-geo-fill"></i> Endereços</h5>
+                    <p class="card-text">Visualize e edite endereços.</p>
+                    <a href="{{ route('admin.enderecos.index') }}" class="btn btn-light">Ver Endereços</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card text-white bg-dark">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="bi bi-image-fill"></i> Fotos de Produtos</h5>
+                    <p class="card-text">Gerencie imagens de produtos.</p>
+                    <a href="{{ route('admin.fotos.index', 1) }}" class="btn btn-light">Ver Fotos</a>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
