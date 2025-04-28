@@ -1,53 +1,52 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProdutoController;
-use App\Http\Controllers\FotoProdutoController;
-use App\Http\Controllers\EnderecoController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CidadeController;
-use App\Http\Controllers\VendaController;
-use App\Http\Controllers\LojaController;
+use App\Http\Controllers\EnderecoController;
+use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\Admin\FotoProdutoController;
 
-// ROTAS PARA O CLIENTE (LOJA)
-Route::get('/', [LojaController::class, 'index'])->name('loja.index');
-Route::get('/produto/{id}', [LojaController::class, 'show'])->name('loja.produtos.show');
+// Página inicial
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// ROTAS PARA O ADMINISTRADOR
+// ROTAS DO CLIENTE (públicas por enquanto)
+Route::resource('enderecos', EnderecoController::class);
 
-// Painel de Administração
-Route::get('/admin', function () {
-    return view('admin.index'); // <- Corrigido aqui!
-})->name('admin.dashboard');
+// ROTAS DO ADMINISTRADOR
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Painel Administrativo principal
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
-// Produtos (Administração)
-Route::get('/admin/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
-Route::get('/admin/produtos/cadastrar', [ProdutoController::class, 'cadastrar'])->name('produtos.cadastrar');
-Route::post('/admin/produtos/inserir', [ProdutoController::class, 'inserir'])->name('produtos.inserir');
-Route::get('/admin/produtos/alterar/{id}', [ProdutoController::class, 'alterar'])->name('produtos.alterar');
-Route::post('/admin/produtos/editar/{id}', [ProdutoController::class, 'editar'])->name('produtos.editar');
-Route::get('/admin/produtos/excluir/{id}', [ProdutoController::class, 'excluir'])->name('produtos.excluir');
+    // Cidades
+    Route::resource('cidades', CidadeController::class);
 
-// Fotos de Produtos (Administração)
-Route::get('/admin/fotos', [FotoProdutoController::class, 'index'])->name('fotos.index');
-Route::get('/admin/fotos/cadastrar', [FotoProdutoController::class, 'cadastrar'])->name('fotos.cadastrar');
-Route::post('/admin/fotos/inserir', [FotoProdutoController::class, 'inserir'])->name('fotos.inserir');
-Route::get('/admin/fotos/excluir/{id}', [FotoProdutoController::class, 'excluir'])->name('fotos.excluir');
+    // Endereços
+    Route::resource('enderecos', EnderecoController::class);
 
-// Endereços (Administração)
-Route::get('/admin/enderecos', [EnderecoController::class, 'index'])->name('enderecos.index');
-Route::get('/admin/enderecos/cadastrar', [EnderecoController::class, 'cadastrar'])->name('enderecos.cadastrar');
-Route::post('/admin/enderecos/inserir', [EnderecoController::class, 'inserir'])->name('enderecos.inserir');
-Route::get('/admin/enderecos/alterar/{id}', [EnderecoController::class, 'alterar'])->name('enderecos.alterar');
-Route::post('/admin/enderecos/editar/{id}', [EnderecoController::class, 'editar'])->name('enderecos.editar');
-Route::get('/admin/enderecos/excluir/{id}', [EnderecoController::class, 'excluir'])->name('enderecos.excluir');
+   // ROTAS DE PRODUTOS
+Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
+Route::get('/produtos/cadastrar', [ProdutoController::class, 'cadastrar'])->name('produtos.cadastrar');
+Route::post('/produtos/cadastrar', [ProdutoController::class, 'inserir'])->name('produtos.inserir');
+Route::get('/produtos/alterar/{id}', [ProdutoController::class, 'alterar'])->name('produtos.alterar');
+Route::post('/produtos/alterar/{id}', [ProdutoController::class, 'editar'])->name('produtos.editar');
+Route::get('/produtos/excluir/{id}', [ProdutoController::class, 'excluir'])->name('produtos.excluir');
+Route::get('/produtos/{id}', [ProdutoController::class, 'show'])->name('produtos.show');
 
-// Cidades (Administração)
-Route::get('/admin/cidades', [CidadeController::class, 'index'])->name('cidades.index');
-Route::get('/admin/cidades/cadastrar', [CidadeController::class, 'cadastrar'])->name('cidades.cadastrar');
-Route::post('/admin/cidades/inserir', [CidadeController::class, 'inserir'])->name('cidades.inserir');
-Route::get('/admin/cidades/alterar/{id}', [CidadeController::class, 'alterar'])->name('cidades.alterar');
-Route::post('/admin/cidades/editar/{id}', [CidadeController::class, 'editar'])->name('cidades.editar');
-Route::get('/admin/cidades/excluir/{id}', [CidadeController::class, 'excluir'])->name('cidades.excluir');
+    // Fotos de Produto
+    Route::get('produtos/{produto}/fotos', [FotoProdutoController::class, 'index'])->name('fotos.index');
+    Route::get('produtos/{produto}/fotos/cadastrar', [FotoProdutoController::class, 'create'])->name('fotos.create');
+    Route::post('produtos/{produto}/fotos/inserir', [FotoProdutoController::class, 'store'])->name('fotos.store');
+    Route::delete('fotos/{id}', [FotoProdutoController::class, 'destroy'])->name('fotos.destroy');
 
-// Vendas (Administração)
-Route::get('/admin/vendas', [VendaController::class, 'index'])->name('vendas.index');
+    // Categorias
+    Route::get('categorias', [CategoriaController::class, 'index'])->name('categorias.index');
+    Route::get('categorias/cadastrar', [CategoriaController::class, 'cadastrar'])->name('categorias.cadastrar');
+    Route::post('categorias/inserir', [CategoriaController::class, 'inserir'])->name('categorias.inserir');
+    Route::get('categorias/alterar/{id}', [CategoriaController::class, 'alterar'])->name('categorias.alterar');
+    Route::post('categorias/editar/{id}', [CategoriaController::class, 'editar'])->name('categorias.editar');
+    Route::get('categorias/excluir/{id}', [CategoriaController::class, 'excluir'])->name('categorias.excluir');
+});

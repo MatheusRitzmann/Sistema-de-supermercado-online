@@ -57,7 +57,7 @@
             <i class="bi bi-speedometer2"></i> Admin
         </div>
 
-        <a href="{{ route('loja.index') }}" class="btn btn-primary">
+        <a href="{{ route('loja.index') }}">
             <i class="bi bi-shop"></i> Ir para Loja
         </a>
 
@@ -65,11 +65,11 @@
             <i class="bi bi-house-door-fill"></i> Dashboard
         </a>
 
-        <a href="{{ route('admin.cidades.index') }}">
+        <a href="{{ route('cidades.index') }}">
             <i class="bi bi-geo-alt-fill"></i> Cidades
         </a>
 
-        <a href="{{ route('admin.enderecos.index') }}">
+        <a href="{{ route('enderecos.index') }}">
             <i class="bi bi-geo-fill"></i> Endereços
         </a>
 
@@ -77,12 +77,16 @@
             <i class="bi bi-box-seam"></i> Produtos
         </a>
 
-        <a href="{{ route('categoria.show') }}">
-            <i class="bi bi-tags-fill"></i> Categorias
+        <a href="{{ route('fotos.index') }}">
+            <i class="bi bi-image-fill"></i> Fotos de Produtos
         </a>
 
-        <a href="{{ route('admin.fotos.escolher') }}">
-            <i class="bi bi-image-fill"></i> Fotos de Produtos
+        <a href="{{ route('vendas.index') }}">
+            <i class="bi bi-cart-fill"></i> Vendas
+        </a>
+
+        <a href="{{ route('categoria.show') }}">
+            <i class="bi bi-tags-fill"></i> Categorias
         </a>
     </div>
 
@@ -90,18 +94,8 @@
         <h1 class="mb-4">Bem-vindo ao Painel Administrativo</h1>
 
         <div class="row">
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title"><i class="bi bi-tags-fill"></i> Categorias</h5>
-                        <p class="card-text">Gerencie as categorias disponíveis.</p>
-                        <a href="{{ route('categoria.show') }}" class="btn btn-light">Ver Categorias</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 mb-4">
-                <div class="card text-white bg-success">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-box-seam"></i> Produtos</h5>
                         <p class="card-text">Gerencie os produtos cadastrados.</p>
@@ -110,36 +104,58 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-tags-fill"></i> Categorias</h5>
+                        <p class="card-text">Gerencie as categorias disponíveis.</p>
+                        <a href="{{ route('categoria.show') }}" class="btn btn-light">Ver Categorias</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-white bg-warning">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-geo-alt-fill"></i> Cidades</h5>
                         <p class="card-text">Gerencie as cidades registradas.</p>
-                        <a href="{{ route('admin.cidades.index') }}" class="btn btn-light">Ver Cidades</a>
+                        <a href="{{ route('cidades.index') }}" class="btn btn-light">Ver Cidades</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-white bg-info">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-geo-fill"></i> Endereços</h5>
                         <p class="card-text">Visualize e edite endereços.</p>
-                        <a href="{{ route('admin.enderecos.index') }}" class="btn btn-light">Ver Endereços</a>
+                        <a href="{{ route('enderecos.index') }}" class="btn btn-light">Ver Endereços</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card text-white bg-dark">
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-image-fill"></i> Fotos de Produtos</h5>
                         <p class="card-text">Gerencie imagens de produtos.</p>
-                        <a href="{{ route('admin.fotos.escolher') }}" class="btn btn-light">Ver Fotos</a>
+                        <a href="{{ route('fotos.index') }}" class="btn btn-light">Ver Fotos</a>
                     </div>
                 </div>
             </div>
+
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card text-white bg-secondary">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-cart-fill"></i> Vendas</h5>
+                        <p class="card-text">Acompanhe as vendas realizadas.</p>
+                        <a href="{{ route('vendas.index') }}" class="btn btn-light">Ver Vendas</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
     </div>
 
     <!-- Bootstrap JS -->

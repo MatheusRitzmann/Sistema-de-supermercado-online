@@ -1,15 +1,50 @@
-@extends('layouts.template')
+@extends('produtos.template')
+
 
 @section('conteudo')
-    <h1>Cadastro de Categoria</h1>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
-    <form action="{{ route('categoria.inserir') }}" method="post">
-        @csrf
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome da categoria</label>
-            <input type="text" class="form-control" id="descricao" name="descricao" placeholder="Nome">
-        </div>
+    <h1>Categorias</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($categorias as $categoria)
+                <tr>
+                    <td>{{ $categoria->id }}</td>
+                    <td>{{ $categoria->descricao }}</td>
+                    <td><a href="{{ route('categoria.alterar', ['id' => $categoria->id]) }}" class="btn btn-info">Alterar</a></td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modalExcluir">
+                        Excluir
+                    </button>
+                    </td>
+                </tr>
 
-        <input type="submit" value="Cadastrar" class="btn btn-success">
-    </form>
+                <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Excluir</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Deseja excluir a categoria {{ $categoria->id }} - {{ $categoria->descricao }}?
+                        </div>
+                        <div class="modal-footer">
+                            <a href="{{ route('categoria.excluir', ['id' => $categoria->id]) }}" class="btn btn-outline-danger">
+                                Excluir
+                            </a>
+                            <button type="button" data-bs-dismiss="modal" class="btn btn-secondary">Cancelar</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </tbody>
+    </table>
+    <a href="{{ route('categoria.cadastrar') }}" class="btn btn-primary">Cadastrar Categoria</a>
 @endsection
