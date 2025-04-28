@@ -57,21 +57,30 @@
             <i class="bi bi-speedometer2"></i> Admin
         </div>
 
+        <a href="{{ route('loja.index') }}" class="btn btn-primary">
+            <i class="bi bi-shop"></i> Ir para Loja
+        </a>
+
         <a href="{{ route('admin.dashboard') }}">
             <i class="bi bi-house-door-fill"></i> Dashboard
         </a>
+
         <a href="{{ route('admin.cidades.index') }}">
             <i class="bi bi-geo-alt-fill"></i> Cidades
         </a>
+
         <a href="{{ route('admin.enderecos.index') }}">
             <i class="bi bi-geo-fill"></i> Endereços
         </a>
-        <a href="{{ route('produtos.show') }}">
+
+        <a href="{{ route('produtos.index') }}">
             <i class="bi bi-box-seam"></i> Produtos
         </a>
+
         <a href="{{ route('categoria.show') }}">
             <i class="bi bi-tags-fill"></i> Categorias
         </a>
+
         <a href="{{ route('admin.fotos.escolher') }}">
             <i class="bi bi-image-fill"></i> Fotos de Produtos
         </a>
@@ -96,7 +105,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-box-seam"></i> Produtos</h5>
                         <p class="card-text">Gerencie os produtos cadastrados.</p>
-                        <a href="{{ route('produtos.show') }}" class="btn btn-light">Ver Produtos</a>
+                        <a href="{{ route('produtos.index') }}" class="btn btn-light">Ver Produtos</a>
                     </div>
                 </div>
             </div>

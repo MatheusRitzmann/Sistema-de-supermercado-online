@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Adicionar Foto para: {{ $produto->nome }}</h1>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
 
     @if ($errors->any())
         <div class="alert alert-danger">

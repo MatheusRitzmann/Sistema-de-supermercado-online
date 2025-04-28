@@ -2,6 +2,7 @@
 
 @section('conteudo')
     <h1>Cadastro de Categoria</h1>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
     <form action="{{ route('categoria.inserir') }}" method="post">
         @csrf
         <div class="mb-3">

@@ -9,7 +9,13 @@ class LojaController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::with('fotos')->get();
         return view('loja.index', compact('produtos'));
+    }
+
+    public function show($id)
+    {
+        $produto = Produto::with('fotos')->findOrFail($id);
+        return view('loja.show', compact('produto'));
     }
 }

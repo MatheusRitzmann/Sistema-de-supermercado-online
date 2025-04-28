@@ -3,6 +3,7 @@
 
 @section('conteudo')
     <h1>Categorias</h1>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
     <table class="table">
         <thead>
             <tr>

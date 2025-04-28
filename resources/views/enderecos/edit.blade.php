@@ -3,6 +3,7 @@
 @section('content')
     <div class="container">
         <h2>Editar Endereço</h2>
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
 
         @if ($errors->any())
             <div class="alert alert-danger">

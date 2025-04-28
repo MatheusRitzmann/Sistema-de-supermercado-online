@@ -5,6 +5,7 @@
 @section('content')
 <div class="container">
     <h2>Endereços Cadastrados</h2>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
     
     @if(session('success'))
         <div class="alert alert-success">

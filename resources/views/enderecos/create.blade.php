@@ -5,6 +5,7 @@
 @section('content')
 <div class="container">
     <h2>Cadastrar Endereço</h2>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
     <form action="{{ route('enderecos.store') }}" method="POST">
         @csrf
         <div class="form-group">

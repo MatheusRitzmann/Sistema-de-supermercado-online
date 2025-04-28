@@ -2,6 +2,7 @@
 
 @section('conteudo')
     <h1>Escolher Produto para Gerenciar Fotos</h1>
+    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
 
     <table class="table table-striped">
         <thead>

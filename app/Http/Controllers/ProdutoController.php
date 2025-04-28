@@ -7,28 +7,28 @@ use App\Models\Produto;
 
 class ProdutoController extends Controller
 {
-    function show()
+    public function index()
     {
-        // Recuperando os produtos que estão no banco de dados
+        // Recuperando todos os produtos do banco
         $produtos = Produto::all();
 
-        // Passando para nossa view a variável de produtos
+        // Passando para a view
         return view('produtos.produtos_show', ['produtos' => $produtos]);
     }
 
-    function cadastrar()
+    public function cadastrar()
     {
         return view('produtos.produtos_new');
     }
 
-    function alterar($id)
+    public function alterar($id)
     {
         $produto = Produto::findOrFail($id);
 
         return view('produtos.produtos_edit', ['produto' => $produto]);
     }
 
-    function inserir(Request $request)
+    public function inserir(Request $request)
     {
         $produto = new Produto();
 
@@ -36,14 +36,14 @@ class ProdutoController extends Controller
         $produto->descricao = $request->descricao;
         $produto->quantidade = $request->quantidade;
         $produto->preco = $request->preco;
-        $produto->categoria_id = $request->categoria_id; // aqui está correto agora
+        $produto->categoria_id = $request->categoria_id;
 
         $produto->save();
 
-        return redirect()->route('produtos.show');
+        return redirect()->route('produtos.index');
     }
 
-    function editar(Request $request, $id)
+    public function editar(Request $request, $id)
     {
         $produto = Produto::findOrFail($id);
 
@@ -51,19 +51,26 @@ class ProdutoController extends Controller
         $produto->descricao = $request->descricao;
         $produto->quantidade = $request->quantidade;
         $produto->preco = $request->preco;
-        $produto->categoria_id = $request->categoria_id; // aqui também certinho
+        $produto->categoria_id = $request->categoria_id;
 
         $produto->save();
 
-        return redirect()->route('produtos.show');
+        return redirect()->route('produtos.index');
     }
 
-    function excluir($id)
+    public function excluir($id)
     {
         $produto = Produto::findOrFail($id);
 
         $produto->delete();
 
-        return redirect()->route('produtos.show');
+        return redirect()->route('produtos.index');
+    }
+
+    public function show($id)
+    {
+        $produto = Produto::with('fotos')->findOrFail($id);
+
+        return view('produto.show', compact('produto'));
     }
 }
