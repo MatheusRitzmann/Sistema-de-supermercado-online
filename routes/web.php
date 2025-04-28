@@ -30,7 +30,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('produtos/{produto}/fotos', [FotoProdutoController::class, 'index'])->name('fotos.index');
     Route::get('produtos/{produto}/fotos/create', [FotoProdutoController::class, 'create'])->name('fotos.create');
     Route::post('produtos/{produto}/fotos', [FotoProdutoController::class, 'store'])->name('fotos.store');
-    Route::delete('fotos/{foto}', [FotoProdutoController::class, 'destroy'])->name('fotos.destroy'); // <- arrumado aqui
+    Route::delete('fotos/{foto}', [FotoProdutoController::class, 'destroy'])->name('fotos.destroy'); 
     Route::get('fotos', [AdminController::class, 'fotosProdutosEscolher'])->name('fotos.escolher');
 });
 
