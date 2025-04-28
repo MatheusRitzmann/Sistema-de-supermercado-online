@@ -17,8 +17,7 @@ return new class extends Migration
             $table->text('descricao');
             $table->integer('quantidade');
             $table->double('preco'); #double
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categoria_produtos');
+            $table->foreignId('categoria_id')->constrained('categorias')->onDelete('cascade');
             $table->timestamps(); #Data de criação e Data de última alteração.
         });
     }
