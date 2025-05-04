@@ -12,14 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->id(); #Bigint PK
-            $table->string('nome', 255); #varchar
+            $table->id(); // Bigint PK
+            $table->string('nome', 255); // varchar
             $table->text('descricao');
-            $table->integer('quantidade');
-            $table->double('preco'); #double
-            $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->timestamps(); #Data de criação e Data de última alteração.
+            $table->integer('quantidade')->unsigned()->default(0); // Adicionando unsigned e default
+            $table->double('preco')->unsigned(); // Adicionando unsigned
+            $table->unsignedBigInteger('categoria_id'); // Chave estrangeira
+
+            // Definindo a chave estrangeira
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
+
+            $table->timestamps(); // Data de criação e Data de última alteração.
         });
     }
 
