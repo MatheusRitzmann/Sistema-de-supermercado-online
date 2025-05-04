@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('fotos', function (Blueprint $table) {
             $table->id();
             $table->string('nome_arquivo'); 
-            $table->foreignId('produto_id')->constrained()->onDelete('cascade'); // Relacionamento com a tabela de produtos
+            $table->unsignedBigInteger('produto_id'); // Definindo a coluna como unsignedBigInteger
+
+            // Definindo a chave estrangeira corretamente
+            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.
@@ -28,4 +31,3 @@ return new class extends Migration
         Schema::dropIfExists('fotos');
     }
 };
-
