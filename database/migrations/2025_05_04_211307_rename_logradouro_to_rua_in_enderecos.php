@@ -30,3 +30,4 @@ class RenameLogradouroToRuaInEnderecos extends Migration
         });
     }
 }
+
