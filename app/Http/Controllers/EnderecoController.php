@@ -3,120 +3,91 @@
 namespace App\Http\Controllers;
 
 use App\Models\Endereco;
-use App\Models\Cidade; // Importando o modelo Cidade
+use App\Models\Cidade;
 use Illuminate\Http\Request;
 
 class EnderecoController extends Controller
 {
-    /**
-     * Exibe todos os endereços cadastrados.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $enderecos = Endereco::all(); // Pega todos os endereços do banco
-        return view('enderecos.index', compact('enderecos')); // Retorna para a view com todos os endereços
+        $enderecos = Endereco::with('cidade')->get();
+        return view('enderecos.index', compact('enderecos'));
     }
 
-    /**
-     * Exibe o formulário para criação de um novo endereço.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        $cidades = Cidade::all(); // Pega todas as cidades para a seleção no formulário
-        return view('enderecos.create', compact('cidades')); // Retorna para a view 'create' com as cidades
+        $cidades = Cidade::orderBy('nome')->get();
+        return view('enderecos.create', compact('cidades'));
     }
 
-    /**
-     * Cria um novo endereço no banco de dados.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
-{
-    $request->validate([
-        'descricao' => 'required|string',
-        'rua' => 'required|string',
-        'numero' => 'required|string',
-        'bairro' => 'required|string',
-        'cidade_id' => 'required|exists:cidades,id',
-    ]);
+    {
+        // 1. Primeiro, vamos debugar o que está chegando
+        logger()->info('Dados recebidos no request:', $request->all());
+        
+        // 2. Validação (como você já tinha)
+        $validated = $request->validate([
+            'descricao' => 'required|string|max:255',
+            'rua' => 'required|string|max:255',
+            'numero' => 'required|string|max:20',
+            'bairro' => 'required|string|max:255',
+            'cidade_id' => 'required|exists:cidades,id',
+        ]);
+    
+        // 3. Verifique os dados validados
+        logger()->info('Dados após validação:', $validated);
+    
+        try {
+            // 4. Crie o endereço de forma explícita para melhor controle
+            $endereco = new Endereco();
+            $endereco->descricao = $validated['descricao'];
+            $endereco->rua = $validated['rua']; // Garantindo que o campo rua está sendo setado
+            $endereco->numero = $validated['numero'];
+            $endereco->bairro = $validated['bairro'];
+            $endereco->cidade_id = $validated['cidade_id'];
+            $endereco->cliente_id = 1; // Temporário para testes
+            $endereco->save();
+    
+            // 5. Log de sucesso
+            logger()->info('Endereço criado com ID: ' . $endereco->id);
+    
+            return redirect()->route('admin.enderecos.index')
+                           ->with('success', 'Endereço cadastrado com sucesso!');
+            
+        } catch (\Exception $e) {
+            // 6. Log de erro detalhado
+            logger()->error('Erro ao criar endereço: ' . $e->getMessage());
+            
+            return back()->withInput()
+                        ->with('error', 'Erro ao cadastrar: ' . $e->getMessage());
+        }
+    }
 
-    $endereco = new Endereco();
-    $endereco->descricao = $request->descricao;
-    $endereco->rua = $request->rua;
-    $endereco->numero = $request->numero;
-    $endereco->bairro = $request->bairro;
-    $endereco->cidade_id = $request->cidade_id;
-
-    // Apenas para testes, usar o ID de um cliente que existe no banco
-    $endereco->cliente_id = 1;
-
-    $endereco->save();
-
-    return redirect()->route('enderecos.index')->with('success', 'Endereço cadastrado com sucesso!');
-}
-
-    /**
-     * Exibe o formulário de edição de um endereço.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
-{
-    $endereco = Endereco::findOrFail($id);
-    $cidades = Cidade::all(); // caso você tenha o select de cidades no form
+    {
+        $endereco = Endereco::findOrFail($id);
+        $cidades = Cidade::orderBy('nome')->get();
+        return view('enderecos.edit', compact('endereco', 'cidades'));
+    }
 
-    return view('enderecos.edit', compact('endereco', 'cidades'));
-}
-
-    /**
-     * Atualiza um endereço no banco de dados.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'descricao' => 'required|string', // A descrição precisa ser obrigatória
-            'rua' => 'required|string', // A rua precisa ser obrigatória
-            'numero' => 'required|string', // O número precisa ser obrigatório
-            'bairro' => 'required|string', // O bairro precisa ser obrigatório
-            'cidade_id' => 'required|exists:cidades,id', // A cidade precisa existir na tabela de cidades
+        $validated = $request->validate([
+            'descricao' => 'required|string|max:255',
+            'rua' => 'required|string|max:255',
+            'numero' => 'required|string|max:20',
+            'bairro' => 'required|string|max:255',
+            'cidade_id' => 'required|exists:cidades,id',
         ]);
 
-        // Encontra o endereço pelo ID
-        $endereco = Endereco::find($id);
-        $endereco->descricao = $request->descricao;
-        $endereco->rua = $request->rua;
-        $endereco->numero = $request->numero;
-        $endereco->bairro = $request->bairro;
-        $endereco->cidade_id = $request->cidade_id;
-        $endereco->save(); // Atualiza os dados do endereço
+        Endereco::findOrFail($id)->update($validated);
 
-        // Redireciona para a lista de endereços com uma mensagem de sucesso
-        return redirect()->route('enderecos.index')->with('success', 'Endereço atualizado com sucesso!');
+        return redirect()->route('admin.enderecos.index')->with('success', 'Endereço atualizado com sucesso!');
     }
 
-    /**
-     * Remove o endereço do banco de dados.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $endereco = Endereco::find($id);
-        $endereco->delete(); // Deleta o endereço do banco
-
-        // Redireciona para a lista de endereços com uma mensagem de sucesso
-        return redirect()->route('enderecos.index')->with('success', 'Endereço deletado com sucesso!');
+        Endereco::findOrFail($id)->delete();
+        return redirect()->route('admin.enderecos.index')->with('success', 'Endereço removido com sucesso!');
     }
 }

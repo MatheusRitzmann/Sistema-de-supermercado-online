@@ -1,10 +1,11 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
     <div class="card">
         <div class="card-header">
             <h5>Adicionar Foto ao Produto: {{ $produto->nome }}</h5>
+            
         </div>
         <div class="card-body">
             <form action="{{ route('admin.fotos.store', $produto->id) }}" 

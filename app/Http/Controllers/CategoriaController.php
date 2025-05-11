@@ -2,54 +2,79 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Categoria;
+use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
 {
-    function show(){
-
-        $categorias = Categoria::all();
-    return view('categorias.categorias_show', ['categorias' => $categorias]);
+    /**
+     * Mostra a lista de categorias
+     */
+    public function index()
+    {
+        $categorias = Categoria::latest()->get();
+        return view('admin.categorias.index', compact('categorias'));
     }
 
-    function cadastrar(){
-        return view('categorias.categorias_new');
+    /**
+     * Mostra o formulário de criação
+     */
+    public function create()
+    {
+        return view('admin.categorias.create');
     }
 
-    function alterar($id){
+    /**
+     * Armazena uma nova categoria (antigo "inserir")
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:categorias',
+            'descricao' => 'nullable|string'
+        ]);
+
+        Categoria::create($request->all());
+
+        return redirect()->route('admin.categorias.index')
+                         ->with('success', 'Categoria criada com sucesso!');
+    }
+
+    /**
+     * Mostra o formulário de edição
+     */
+    public function edit($id)
+    {
         $categoria = Categoria::findOrFail($id);
-
-        return view('categorias_edit', ['categoria' => $categoria]);
+        return view('admin.categorias.edit', compact('categoria'));
     }
 
-    function inserir(Request $request){
-        $categoria = new Categoria();
+    /**
+     * Atualiza a categoria (antigo "editar")
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nome' => 'required|string|max:255|unique:categorias,nome,'.$id,
+            'descricao' => 'nullable|string'
+        ]);
 
-        $categoria->descricao = $request->descricao;
-        
-
-        $categoria->save();
-
-        return redirect()->route('categoria.show');
-    }
-
-    function editar(Request $request, $id){
         $categoria = Categoria::findOrFail($id);
+        $categoria->update($request->all());
 
-        $categoria->descricao = $request->descricao;
-        
-        $categoria->save();
-        
-        return redirect()->route('categoria.show');
+        return redirect()->route('admin.categorias.index')
+                         ->with('success', 'Categoria atualizada!');
     }
 
-    function excluir($id){
+    /**
+     * Remove uma categoria (antigo "excluir")
+     */
+    public function destroy($id)
+    {
         $categoria = Categoria::findOrFail($id);
-
         $categoria->delete();
 
-        return redirect()->route('categoria.show');
+        return redirect()->route('admin.categorias.index')
+                         ->with('success', 'Categoria removida!');
     }
 }
