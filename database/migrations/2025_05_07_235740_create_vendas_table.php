@@ -17,8 +17,6 @@ return new class extends Migration
             $table->foreignId('endereco_id')->constrained('enderecos')->onDelete('cascade');
             $table->decimal('valor_total', 10, 2)->default(0);
             $table->string('status')->default('pendente'); // pendente, processando, enviado, entregue, cancelado
-            $table->string('metodo_pagamento')->nullable(); // dinheiro, cartão, pix, etc
-            $table->text('observacoes')->nullable();
             $table->timestamps();
             $table->softDeletes(); // Para deletar sem perder histórico
         });

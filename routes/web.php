@@ -7,7 +7,7 @@ use App\Http\Controllers\EnderecoController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\Admin\FotoProdutoController;
-use App\Http\Controllers\Admin\VendaController;
+use App\Http\Controllers\VendaController;
 use App\Http\Controllers\LojaController;
 
 // ================== ROTAS PÚBLICAS ================== //
@@ -50,7 +50,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('/{id}', 'update')->name('update');
         Route::delete('/{id}', 'destroy')->name('destroy');
         Route::get('/{id}', 'show')->name('show');
+        //Route::get('/','cadastrar')->name('produtos.cadastrar');
+        Route::post('/cadastrar','inserir')->name('inserir');
+        
     });
+
 
     // Fotos dos Produtos (igual ao original)
     Route::controller(FotoProdutoController::class)->prefix('produtos-fotos')->name('fotos.')->group(function () {

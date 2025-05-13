@@ -52,5 +52,5 @@
         </tbody>
     </table>
 
-    <a href="{{ route('produtos.cadastrar') }}" class="btn btn-primary">Cadastrar Produto</a>
+    <a href="{{ route('admin.produtos.create') }}" class="btn btn-primary">Cadastrar Produto</a>
 @endsection
