@@ -48,6 +48,25 @@
             padding: 20px 0;
             border-bottom: 1px solid #495057;
         }
+        .logout-button {
+            margin-top: auto;
+            padding: 15px 20px;
+            background-color: #dc3545;
+            border: none;
+            text-align: left;
+            color: white;
+            font-weight: bold;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #495057;
+        }
+        .logout-button i {
+            margin-right: 10px;
+        }
+        .logout-button:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -88,6 +107,14 @@
         <a href="{{ route('admin.categorias.index') }}">
             <i class="bi bi-tags-fill"></i> Categorias
         </a>
+
+        <!-- Botão de Logout -->
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="logout-button">
+                <i class="bi bi-box-arrow-right"></i> Sair
+            </button>
+        </form>
     </div>
 
     <div class="content">
