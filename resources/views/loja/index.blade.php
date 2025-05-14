@@ -143,7 +143,8 @@
           <h6 class="mt-auto fw-bold" style="color: #0d6efd;">R$ {{ number_format($produto->preco, 2, ',', '.') }}</h6>
           <div class="d-grid gap-2 mt-3">
             <a href="#" class="btn btn-success rounded-pill">Comprar</a>
-            <a href="{{ route('loja.produtos.show', $produto->id) }}" class="btn btn-outline-primary rounded-pill">Ver Detalhes</a>
+            <a href="{{ route('loja.show', $produto->id) }}" class="btn btn-outline-primary rounded-pill">Ver Detalhes</a>
+
           </div>
         </div>
       </div>

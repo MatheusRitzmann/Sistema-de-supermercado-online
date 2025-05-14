@@ -112,14 +112,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(fun
         Route::get('/{id}', 'show')->name('show');
     });
     
-    // Fotos dos Produtos
-    Route::controller(FotoProdutoController::class)->prefix('produtos-fotos')->name('fotos.')->group(function () {
-        Route::get('/', 'listagemProdutos')->name('listagem');
-        Route::get('/{produto}/gerenciar', 'index')->name('index');
-        Route::get('/{produto}/cadastrar', 'create')->name('create');
-        Route::post('/{produto}/salvar', 'store')->name('store');
-        Route::delete('/{foto}', 'destroy')->name('destroy');
-    });
+// Fotos dos Produtos
+Route::controller(FotoProdutoController::class)->prefix('produtos-fotos')->name('fotos.')->group(function () {
+    Route::get('/', 'listagem')->name('listagem');  // Corrigido: 'listagem' ao invés de 'listagemProdutos'
+    Route::get('/{produto}/gerenciar', 'index')->name('index');
+    Route::get('/{produto}/cadastrar', 'create')->name('create');
+    Route::post('/{produto}/salvar', 'store')->name('store');
+    Route::delete('/{foto}', 'destroy')->name('destroy');
+});
     
     // Categorias
     Route::resource('categorias', CategoriaController::class)->except(['show']);

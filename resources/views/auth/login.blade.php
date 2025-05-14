@@ -12,7 +12,7 @@
             --primary-50: #f0f9ff;
             --primary-100: #e0f2fe;
             --primary-200: #bae6fd;
-            --primary-300: #7dd3fc;
+            --primary-300:rgb(32, 208, 16);
             --primary-400: #38bdf8;
             --primary-500: #0ea5e9;
             --primary-600: #0284c7;
@@ -231,28 +231,16 @@
     <!-- Particles Background -->
     <div id="particles-js" class="absolute inset-0 overflow-hidden"></div>
     
-    <!-- Main Login Container -->
-    <div class="login-container w-full max-w-6xl flex flex-col lg:flex-row animate__animated animate__fadeIn">
-        <!-- Illustration Side -->
-        <div class="illustration-side text-white p-12 lg:w-1/2 flex flex-col justify-center items-center text-center relative">
-            <div class="absolute inset-0 bg-black opacity-10 z-0"></div>
-            <div class="relative z-10">
-                <h2 class="text-4xl font-bold mb-6 animate__animated animate__fadeInDown">Bem-vindo ao Painel</h2>
-                <p class="text-lg opacity-90 mb-8 animate__animated animate__fadeIn animate__delay-1s">
-                    Acesse sua conta para gerenciar todo o sistema administrativo com segurança e eficiência.
-                </p>
-                
-                </div>
-                <div class="mt-8 flex justify-center space-x-4 animate__animated animate__fadeInUp animate__delay-3s">
-                    <div class="w-3 h-3 rounded-full bg-white opacity-60"></div>
-                    <div class="w-3 h-3 rounded-full bg-white opacity-30"></div>
-                    <div class="w-3 h-3 rounded-full bg-white opacity-10"></div>
-                </div>
-            </div>
-        </div>
+  
         
         <!-- Form Side -->
-        <div class="p-12 lg:w-1/2 flex flex-col justify-center relative">
+<div class="lg:w-1/2 h-full flex items-center justify-center p-8">
+  <div class="bg-white border-4 border-gray-300 rounded-2xl shadow-lg p-10 w-full max-w-md mx-auto">
+  <div class="mb-12">
+    <h2 class="text-3xl font-bold text-white"></h2>
+  </div>
+
+  <div class="flex-grow flex flex-col justify-center space-y-6">
             <!-- Logo -->
             <div class="absolute top-6 left-6">
                 <div class="flex items-center">
@@ -261,7 +249,7 @@
                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <span class="font-bold text-xl text-gray-800">Admin<span class="text-primary-600">Pro</span></span>
+                    <span class="font-bold text-xl text-gray-800"><span class="text-primary-600"></span></span>
                 </div>
             </div>
             

@@ -1,37 +1,69 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin - @yield('title')</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <style>
+        /* Seu CSS personalizado aqui */
+        body { background-color: #f8f9fa; }
+        .sidebar { 
+            width: 250px;
+            background-color:rgb(28, 63, 98);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .sidebar {
+    width: 250px;
+    background-color: #212529;
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+}
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+.sidebar a {
+    color: #adb5bd;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: block;
+    transition: all 0.3s;
+}
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+.sidebar a:hover {
+    color: #fff;
+    background-color: #343a40;
+}
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+.sidebar a i {
+    margin-right: 10px;
+}
 
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endif
+.sidebar-header {
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #495057;
+}
+    </style>
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Inclui o sidebar -->
+        @include('admin.partials.sidebar')
+        
+        <!-- Área de conteúdo -->
+        <main class="flex-grow-1 p-4">
+            @yield('content')
+        </main>
+    </div>
 
-            <!-- Page Content -->
-            <main>
-                @yield('content')
-
-            </main>
-        </div>
-    </body>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

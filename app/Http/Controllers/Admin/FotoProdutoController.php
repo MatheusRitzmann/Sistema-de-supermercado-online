@@ -11,10 +11,13 @@ use Illuminate\Support\Facades\Storage;
 class FotoProdutoController extends Controller
 {
     public function listagem()
-    {
-        $produtos = Produto::has('fotos')->with('fotos')->get();
-        return view('admin.fotos.listagem', compact('produtos'));
-    }
+{
+    // Buscar todos os produtos com fotos
+    $produtos = Produto::has('fotos')->with('fotos')->get();
+    
+    // Exibir a view de listagem, passando os produtos para ela
+    return view('admin.fotos.listagem', compact('produtos'));
+}
 
     public function index(Produto $produto)
     {
@@ -22,24 +25,30 @@ class FotoProdutoController extends Controller
     }
 
     public function create(Produto $produto)
-    {
-        return view('admin.fotos.create', compact('produto'));
-    }
+{
+    // Retorna a view de criação de foto, passando o produto
+    return view('admin.fotos.create', compact('produto'));
+}
 
     public function store(Request $request, Produto $produto)
-    {
-        $request->validate(['foto' => 'required|image|max:2048']);
-        
-        $path = $request->file('foto')->store('produtos', 'public');
-        $produto->fotos()->create(['arquivo' => $path]);
-        
-        return redirect()->route('admin.fotos.index', $produto)
-                       ->with('success', 'Foto adicionada!');
-    }
+{
+    $request->validate(['foto' => 'required|image|max:2048']);
+
+    // Armazenar a foto e pegar o caminho
+    $path = $request->file('foto')->store('produtos', 'public');
+    
+    // Criar o registro da foto no banco
+    $produto->fotos()->create([
+        'nome_arquivo' => $path  // Salvar o nome do arquivo na coluna 'nome_arquivo'
+    ]);
+    
+    return redirect()->route('admin.fotos.index', $produto)
+                    ->with('success', 'Foto adicionada!');
+}
 
     public function destroy(FotoProduto $foto)
     {
-        Storage::delete($foto->arquivo);
+        Storage::disk('public')->delete($foto->arquivo);
         $foto->delete();
         return back()->with('success', 'Foto removida!');
     }

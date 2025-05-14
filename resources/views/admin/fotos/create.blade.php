@@ -8,7 +8,8 @@
             
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.fotos.store', $produto->id) }}" 
+            <form action="{{ route('admin.fotos.store', $produto->id) }}" method="POST" enctype="multipart/form-data">
+
                   method="POST" 
                   enctype="multipart/form-data">
                 @csrf

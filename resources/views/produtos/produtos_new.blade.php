@@ -3,7 +3,8 @@
 @section('conteudo')
     <h1>Cadastro de Produtos</h1>
     <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
-    <form action="{{ route('produtos.inserir') }}" method="post">
+    <form action="{{ route('admin.produtos.store') }}" method="post">
+
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome do Produto</label>

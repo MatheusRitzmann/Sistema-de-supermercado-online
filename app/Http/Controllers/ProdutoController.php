@@ -13,18 +13,12 @@ class ProdutoController extends Controller
         return view('produtos.produtos_show', ['produtos' => $produtos]);
     }
 
-    public function cadastrar()
+    public function create()
     {
         return view('produtos.produtos_new');
     }
 
-    public function alterar($id)
-    {
-        $produto = Produto::findOrFail($id);
-        return view('produtos.produtos_edit', ['produto' => $produto]);
-    }
-
-    public function inserir(Request $request)
+    public function store(Request $request)
     {
         $produto = new Produto();
         $produto->nome = $request->nome;
@@ -34,10 +28,16 @@ class ProdutoController extends Controller
         $produto->categoria_id = $request->categoria_id;
         $produto->save();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('admin.produtos.index');
     }
 
-    public function editar(Request $request, $id)
+    public function edit($id)
+    {
+        $produto = Produto::findOrFail($id);
+        return view('produtos.produtos_edit', ['produto' => $produto]);
+    }
+
+    public function update(Request $request, $id)
     {
         $produto = Produto::findOrFail($id);
         $produto->nome = $request->nome;
@@ -47,15 +47,15 @@ class ProdutoController extends Controller
         $produto->categoria_id = $request->categoria_id;
         $produto->save();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('admin.produtos.index');
     }
 
-    public function excluir($id)
+    public function destroy($id)
     {
         $produto = Produto::findOrFail($id);
         $produto->delete();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('admin.produtos.index');
     }
 
     public function show($id)

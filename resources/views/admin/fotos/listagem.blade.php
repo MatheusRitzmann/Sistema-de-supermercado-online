@@ -19,9 +19,17 @@
                 @endif
                 <div class="card-body">
                     <h5>{{ $produto->nome }}</h5>
+                    
+                    <!-- Botão para gerenciar fotos -->
                     <a href="{{ route('admin.fotos.index', $produto->id) }}" 
                        class="btn btn-primary btn-sm">
                         Gerenciar Fotos ({{ $produto->fotos->count() }})
+                    </a>
+                    
+                    <!-- Botão para cadastrar foto -->
+                    <a href="{{ route('admin.fotos.create', $produto->id) }}" 
+                       class="btn btn-success btn-sm mt-2">
+                        Cadastrar Foto
                     </a>
                 </div>
             </div>

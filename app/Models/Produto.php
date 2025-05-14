@@ -13,8 +13,9 @@ class Produto extends Model
         'nome', 'descricao', 'preco', 'categoria_id',
     ];
 
+    // Relação com a tabela 'fotos'
     public function fotos()
     {
-        return $this->hasMany(FotoProduto::class);
+        return $this->hasMany(Foto::class);  // Foto é o modelo que representa a tabela 'fotos'
     }
 }
