@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Nome</th>
+                <th>Descrição</th>
                 <th>Preço</th>
                 <th>Operações</th>
             </tr>
@@ -19,10 +20,11 @@
                 <tr>
                     <td>{{ $produto->id }}</td>
                     <td>{{ $produto->nome }}</td>
+                    <td>{{ $produto->descricao}}</td>
                     <td>R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                     <td>
-                        <a href="{{ route('produtos.show', $produto->id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <a href="{{ route('produtos.alterar', $produto->id) }}" class="btn btn-info btn-sm">Alterar</a>
+                        <a href="{{ route('admin.produtos.index', $produto->id) }}" class="btn btn-success btn-sm">Ver</a>
+                        <a href="{{ route('admin.produtos.alterar', $produto->id) }}" class="btn btn-info btn-sm">Alterar</a>
                         
                         <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalExcluir{{ $produto->id }}">
                             Excluir
@@ -42,7 +44,7 @@
                                 Deseja realmente excluir o produto <strong>{{ $produto->nome }}</strong>?
                             </div>
                             <div class="modal-footer">
-                                <a href="{{ route('produtos.excluir', $produto->id) }}" class="btn btn-outline-danger">Excluir</a>
+                                <a href="{{ route('admin.produtos.destroy', $produto->id) }}" class="btn btn-outline-danger">Excluir</a>
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             </div>
                         </div>
@@ -52,5 +54,5 @@
         </tbody>
     </table>
 
-    <a href="{{ route('admin.produtos.create') }}" class="btn btn-primary">Cadastrar Produto</a>
+    <a href="{{ route('admin.produtos.cadastrar') }}" class="btn btn-primary">Cadastrar Produto</a>
 @endsection

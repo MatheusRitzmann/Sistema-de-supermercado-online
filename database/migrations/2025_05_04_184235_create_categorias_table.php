@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
+            $table->string("nome")->unique()->notNullable();
             $table->string("descricao")->unique()->notNullable(); // Adicionando unique e not null
             $table->timestamps();
         });
