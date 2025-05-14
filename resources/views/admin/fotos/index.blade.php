@@ -1,36 +1,47 @@
-@extends('layouts.template')
+@extends('layouts.app')
 
-@section('conteudo')
+@section('content')
+<div class="container">
+    <div class="d-flex justify-content-between mb-4">
+        <h1>Fotos do Produto: {{ $produto->nome }}</h1>
+        <a href="{{ route('admin.fotos.create', $produto->id) }}" 
+           class="btn btn-success">
+            + Adicionar Foto
+        </a>
+    </div>
 
-    <h1>Fotos do Produto: {{ $produto->nome }}</h1>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-    <a href="{{ route('admin.fotos.create', $produto->id) }}" class="btn btn-primary">Adicionar Nova Foto</a>
-
-    <table class="table table-striped mt-3">
-        <thead>
-            <tr>
-                <th>Imagem</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($fotos as $foto)
-                <tr>
-                    <td>
-                    <img src="{{ asset('storage/' . $foto->arquivo) }}" alt="Foto do produto" width="120">
-
-                    </td>
-                    <td>
-                        <form action="{{ route('admin.fotos.destroy', $foto->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta foto?')">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger btn-sm">Excluir</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
+    <div class="row">
+        @forelse($fotos as $foto)
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img src="{{ Storage::url($foto->arquivo) }}" 
+                     class="card-img-top" 
+                     style="height: 150px; object-fit: cover;">
+                <div class="card-body text-center">
+                    <form action="{{ route('admin.fotos.destroy', $foto->id) }}" 
+                          method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">
+                            Excluir
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @empty
+        <div class="col-12">
+            <div class="alert alert-info">
+                Nenhuma foto cadastrada.
+            </div>
+        </div>
+        @endforelse
+    </div>
+</div>
 @endsection

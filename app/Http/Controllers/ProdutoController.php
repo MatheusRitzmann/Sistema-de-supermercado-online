@@ -10,7 +10,7 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::all();
-        return view('produtos.produtos_show', ['produtos' => $produtos]);
+            return view('produtos.produtos_show', ['produtos' => $produtos]);
     }
 
     public function cadastrar()
@@ -34,10 +34,10 @@ class ProdutoController extends Controller
         $produto->categoria_id = $request->categoria_id;
         $produto->save();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('admin.produtos.index');
     }
 
-    public function editar(Request $request, $id)
+    public function edit(Request $request, $id)
     {
         $produto = Produto::findOrFail($id);
         $produto->nome = $request->nome;
@@ -47,15 +47,15 @@ class ProdutoController extends Controller
         $produto->categoria_id = $request->categoria_id;
         $produto->save();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('admin.produtos.index');
     }
 
-    public function excluir($id)
+    public function destroy($id)
     {
         $produto = Produto::findOrFail($id);
         $produto->delete();
 
-        return redirect()->route('produtos.index');
+        return redirect()->route('admin.produtos.index');
     }
 
     public function show($id)

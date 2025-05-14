@@ -1,4 +1,4 @@
-@extends('produtos.template')
+@extends('layouts.app')
 
 @section('conteudo')
     <h1>Escolher Produto para Gerenciar Fotos</h1>

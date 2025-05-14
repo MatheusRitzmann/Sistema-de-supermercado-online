@@ -65,27 +65,27 @@
             <i class="bi bi-house-door-fill"></i> Dashboard
         </a>
 
-        <a href="{{ route('cidades.index') }}">
+        <a href="{{ route('admin.cidades.index') }}">
             <i class="bi bi-geo-alt-fill"></i> Cidades
         </a>
 
-        <a href="{{ route('enderecos.index') }}">
+        <a href="{{ route('admin.enderecos.index') }}">
             <i class="bi bi-geo-fill"></i> Endereços
         </a>
 
-        <a href="{{ route('produtos.index') }}">
+        <a href="{{ route('admin.produtos.index') }}">
             <i class="bi bi-box-seam"></i> Produtos
         </a>
 
-        <a href="{{ route('fotos.index') }}">
+        <a href="{{ route('admin.fotos.listagem') }}">
             <i class="bi bi-image-fill"></i> Fotos de Produtos
         </a>
 
-        <a href="{{ route('vendas.index') }}">
+        <a href="{{ route('admin.vendas.index') }}">
             <i class="bi bi-cart-fill"></i> Vendas
         </a>
 
-        <a href="{{ route('categoria.show') }}">
+        <a href="{{ route('admin.categorias.index') }}">
             <i class="bi bi-tags-fill"></i> Categorias
         </a>
     </div>
@@ -99,7 +99,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-box-seam"></i> Produtos</h5>
                         <p class="card-text">Gerencie os produtos cadastrados.</p>
-                        <a href="{{ route('produtos.index') }}" class="btn btn-light">Ver Produtos</a>
+                        <a href="{{ route('admin.produtos.index') }}" class="btn btn-light">Ver Produtos</a>
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-tags-fill"></i> Categorias</h5>
                         <p class="card-text">Gerencie as categorias disponíveis.</p>
-                        <a href="{{ route('categoria.show') }}" class="btn btn-light">Ver Categorias</a>
+                        <a href="{{ route('admin.categorias.index') }}" class="btn btn-light">Ver Categorias</a>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-geo-alt-fill"></i> Cidades</h5>
                         <p class="card-text">Gerencie as cidades registradas.</p>
-                        <a href="{{ route('cidades.index') }}" class="btn btn-light">Ver Cidades</a>
+                        <a href="{{ route('admin.cidades.index') }}" class="btn btn-light">Ver Cidades</a>
                     </div>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-geo-fill"></i> Endereços</h5>
                         <p class="card-text">Visualize e edite endereços.</p>
-                        <a href="{{ route('enderecos.index') }}" class="btn btn-light">Ver Endereços</a>
+                        <a href="{{ route('admin.enderecos.index') }}" class="btn btn-light">Ver Endereços</a>
                     </div>
                 </div>
             </div>
@@ -139,7 +139,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-image-fill"></i> Fotos de Produtos</h5>
                         <p class="card-text">Gerencie imagens de produtos.</p>
-                        <a href="{{ route('fotos.index') }}" class="btn btn-light">Ver Fotos</a>
+                        <a href="{{ route('admin.fotos.listagem') }}" class="btn btn-light">Ver Fotos</a>
                     </div>
                 </div>
             </div>
@@ -149,13 +149,11 @@
                     <div class="card-body">
                         <h5 class="card-title"><i class="bi bi-cart-fill"></i> Vendas</h5>
                         <p class="card-text">Acompanhe as vendas realizadas.</p>
-                        <a href="{{ route('vendas.index') }}" class="btn btn-light">Ver Vendas</a>
+                        <a href="{{ route('admin.vendas.index') }}" class="btn btn-light">Ver Vendas</a>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
     <!-- Bootstrap JS -->

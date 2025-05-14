@@ -2,28 +2,25 @@
 
 @section('content')
 <div class="container">
-    <h1>Adicionar Foto para: {{ $produto->nome }}</h1>
-    <a href="{{ route('admin.dashboard') }}" class="btn btn-secondary mb-3">Voltar para o Dashboard</a>
-
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+    <div class="card">
+        <div class="card-header">
+            <h5>Adicionar Foto ao Produto: {{ $produto->nome }}</h5>
+            
         </div>
-    @endif
-
-    <form action="{{ route('admin.fotos.store', $produto->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-
-        <div class="mb-3">
-            <label for="foto" class="form-label">Selecionar Foto</label>
-            <input class="form-control" type="file" id="foto" name="foto" required>
+        <div class="card-body">
+            <form action="{{ route('admin.fotos.store', $produto->id) }}" 
+                  method="POST" 
+                  enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label class="form-label">Selecione a foto</label>
+                    <input type="file" name="foto" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Enviar
+                </button>
+            </form>
         </div>
-
-        <button type="submit" class="btn btn-primary">Salvar Foto</button>
-    </form>
+    </div>
 </div>
 @endsection
