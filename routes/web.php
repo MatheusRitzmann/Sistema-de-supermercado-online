@@ -43,14 +43,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     // Produtos (configuração manual como no original)
     Route::controller(ProdutoController::class)->prefix('produtos')->name('produtos.')->group(function () {
-        Route::get('/', 'index')->name('index');
+        //Route::get('/', 'index')->name('index');
+        Route::get('index','index')->name('index');
         Route::get('/create', 'create')->name('create');
         Route::post('/', 'store')->name('store');
-        Route::get('/{id}/edit', 'edit')->name('edit');
-        Route::put('/{id}', 'update')->name('update');
-        Route::delete('/{id}', 'destroy')->name('destroy');
-        Route::get('/{id}', 'show')->name('show');
-        //Route::get('/','cadastrar')->name('produtos.cadastrar');
+        Route::post('/{id}/edit', 'edit')->name('edit');
+        Route::get('/{id}/alterar','alterar')->name('alterar');
+        //Route::put('/{id}', 'update')->name('update');
+        Route::get('/{id}', 'destroy')->name('destroy');
+        //Route::get('/{id}', 'show')->name('show');
+        Route::get('show')->name('show');
+        Route::get('/','cadastrar')->name('cadastrar');
         Route::post('/cadastrar','inserir')->name('inserir');
         
     });
